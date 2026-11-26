@@ -1,0 +1,565 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Amyra Boutique, ladies tailoring in Misbah Nagar, Gulbarga. Blouses, salwar suits, Anarkalis, lehengas and abayas stitched to your measurements. Book on WhatsApp.">
+<title>Amyra Boutique</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Yeseva+One&family=Manrope:wght@400;500;600;700;800&display=swap">
+<style>
+/* Layout: tape-measure header strip, short hero, 4-step stitching order (outfit, style, measurements with body map, booking), price list and visit info */
+:root{
+  --bg:#fbf7fa; --surface:#ffffff; --ink:#2a1023; --muted:#73566a; --line:#eedde8;
+  --rani:#b0175e; --rani-ink:#ffffff; --rani-soft:#fbe3ee; --marigold:#e8a317; --tape:#f6d36b; --ok:#17714a; --ok-soft:#dff3e8; --bad:#b3263e;
+  --display:"Yeseva One", Georgia, serif;
+  --body:"Manrope", "Segoe UI", system-ui, sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#170b13; --surface:#22111c; --ink:#f8e9f1; --muted:#c3a4b6; --line:#3a2131;
+  --rani:#f0609e; --rani-ink:#22071a; --rani-soft:#45172f; --marigold:#f2b838; --tape:#b8902c; --ok:#6fd7a2; --ok-soft:#153526; --bad:#ff8fa2; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#170b13; --surface:#22111c; --ink:#f8e9f1; --muted:#c3a4b6; --line:#3a2131;
+  --rani:#f0609e; --rani-ink:#22071a; --rani-soft:#45172f; --marigold:#f2b838; --tape:#b8902c; --ok:#6fd7a2; --ok-soft:#153526; --bad:#ff8fa2; color-scheme:dark}
+
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+body{background:var(--bg);color:var(--ink);font:16px/1.55 var(--body);margin:0}
+h1,h2,h3{font-family:var(--display);font-weight:400;margin:0;line-height:1.15;text-wrap:balance}
+button,input,select,textarea{font:inherit}
+button{cursor:pointer}
+:focus-visible{outline:3px solid var(--marigold);outline-offset:2px}
+.wrap{max-width:1120px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--surface)}
+.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:9;background:var(--surface)}
+.bar .wrap{display:flex;align-items:center;gap:12px;padding-block:10px}
+.logo{font-family:var(--display);font-size:1.4rem;color:var(--rani);line-height:1}
+.logo small{display:block;font:700 .68rem var(--body);color:var(--muted);letter-spacing:.14em;text-transform:uppercase;margin-top:3px}
+.bar nav{margin-left:auto;display:flex;gap:16px;align-items:center}
+.bar nav a{color:var(--ink);text-decoration:none;font-weight:600;font-size:.94rem}
+.tape{height:14px;background:var(--tape);background-image:repeating-linear-gradient(90deg,var(--ink) 0 1px,transparent 1px 8px),repeating-linear-gradient(90deg,var(--ink) 0 1.5px,transparent 1.5px 40px);background-size:auto 5px,auto 9px;background-repeat:repeat-x;background-position:0 0,0 0;opacity:.9}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;border:0;border-radius:12px;padding:12px 20px;font-weight:800;background:var(--rani);color:var(--rani-ink);text-decoration:none}
+.btn.ghost{background:transparent;color:var(--ink);border:1.5px solid var(--line)}
+.btn.sm{padding:7px 12px;font-size:.86rem}
+@media (max-width:680px){.bar nav a:not(.btn){display:none}}
+
+.hero{padding-block:34px 22px}
+.hero .wrap{display:grid;grid-template-columns:1.3fr 1fr;gap:26px;align-items:center}
+.eyebrow{font-weight:800;color:var(--rani);letter-spacing:.14em;text-transform:uppercase;font-size:.76rem}
+.hero h1{font-size:clamp(2.2rem,5.6vw,3.7rem);margin-top:8px}
+.hero p{color:var(--muted);max-width:52ch;font-size:1.05rem;margin:12px 0 20px}
+.hero .acts{display:flex;flex-wrap:wrap;gap:10px}
+.trust{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+.trust span{border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:5px 12px;font-size:.85rem;font-weight:600}
+.hero-art{justify-self:center;max-width:100%}
+@media (max-width:820px){.hero .wrap{grid-template-columns:1fr}.hero-art{display:none}}
+
+section.block{padding-block:26px}
+.head{margin-bottom:16px}
+.head h2{font-size:clamp(1.7rem,3.8vw,2.5rem)}
+.sub{color:var(--muted);margin:4px 0 0}
+
+/* stepper */
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:16px;counter-reset:s}
+.steps button{border:0;background:var(--surface);border:1.5px solid var(--line);border-radius:12px;padding:10px;text-align:left;color:var(--muted);font-weight:700;font-size:.86rem;display:flex;gap:8px;align-items:center;min-width:0}
+.steps button b{flex:none;width:26px;height:26px;border-radius:50%;display:grid;place-items:center;background:var(--bg);color:var(--ink);font-size:.8rem}
+.steps button span{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.steps button[aria-current="step"]{border-color:var(--rani);color:var(--ink)}
+.steps button[aria-current="step"] b,.steps button.done b{background:var(--rani);color:var(--rani-ink)}
+@media (max-width:560px){.steps button span{display:none}.steps button{justify-content:center}}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:20px;min-width:0}
+.card h3{font-size:1.45rem;margin-bottom:4px}
+.foot{display:flex;justify-content:space-between;gap:10px;margin-top:20px;flex-wrap:wrap}
+
+.garments{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px;margin-top:14px}
+.g{border:1.5px solid var(--line);background:var(--bg);border-radius:14px;padding:12px;text-align:left;color:var(--ink);display:grid;gap:4px}
+.g svg{width:54px;height:54px}
+.g b{font-size:.98rem}
+.g span{font-size:.8rem;color:var(--muted);font-variant-numeric:tabular-nums}
+.g[aria-pressed="true"]{border-color:var(--rani);background:var(--rani-soft)}
+
+.optgroup{margin-top:18px}
+.optgroup > p{margin:0 0 8px;font-weight:800;font-size:.92rem}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{border:1.5px solid var(--line);background:var(--bg);color:var(--ink);border-radius:999px;padding:7px 14px;font-weight:600;font-size:.88rem}
+.chip[aria-pressed="true"]{border-color:var(--rani);background:var(--rani);color:var(--rani-ink)}
+.necks{display:grid;grid-template-columns:repeat(auto-fill,minmax(84px,1fr));gap:8px}
+.neck{border:1.5px solid var(--line);background:var(--bg);border-radius:12px;padding:8px 4px;color:var(--ink);display:grid;justify-items:center;gap:4px;font-size:.78rem;font-weight:700}
+.neck svg{width:46px;height:46px}
+.neck[aria-pressed="true"]{border-color:var(--rani);background:var(--rani-soft)}
+
+label{display:grid;gap:5px;font-size:.88rem;font-weight:700}
+input,select,textarea{width:100%;padding:10px 12px;border:1.5px solid var(--line);border-radius:10px;background:var(--bg);color:var(--ink);font-weight:500}
+input:focus,select:focus,textarea:focus{border-color:var(--rani);outline:none}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media (max-width:460px){.row2{grid-template-columns:1fr}}
+
+/* measurement step */
+.measure{display:grid;grid-template-columns:260px 1fr;gap:22px;align-items:start}
+@media (max-width:760px){.measure{grid-template-columns:1fr}.figure-wrap{top:calc(env(safe-area-inset-top,0px) + 76px);z-index:5;display:grid;grid-template-columns:78px 1fr;gap:12px;align-items:center;padding:8px 12px;box-shadow:0 6px 16px -10px rgba(0,0,0,.35)}.figure-wrap .tip{margin:0;font-size:.82rem}}
+.figure-wrap{position:sticky;top:90px;background:var(--bg);border-radius:16px;padding:12px}
+.figure{width:100%;max-width:100%;height:auto}
+.figure .ln{stroke:var(--muted);stroke-width:1.6;opacity:.22;fill:none}
+.figure .ln.on{stroke:var(--rani);opacity:1;stroke-width:3}
+.figure .pt{fill:var(--rani);opacity:0}
+.figure .pt.on{opacity:1}
+.tip{font-size:.88rem;color:var(--muted);margin-top:8px}
+.tip b{color:var(--ink);display:block;font-size:.95rem}
+.method{display:grid;gap:8px;margin-bottom:14px}
+.method label{display:flex;gap:10px;align-items:flex-start;font-weight:600;border:1.5px solid var(--line);border-radius:12px;padding:10px 12px;background:var(--bg)}
+.method input{width:auto;margin-top:4px}
+.method label:has(input:checked){border-color:var(--rani);background:var(--rani-soft)}
+.mfields{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px}
+.mf label{font-size:.82rem}
+.mf .unit{position:relative}
+.mf .unit input{padding-right:34px;font-variant-numeric:tabular-nums}
+.mf .unit::after{content:"in";position:absolute;right:10px;top:50%;transform:translateY(-50%);color:var(--muted);font-size:.8rem;font-weight:700}
+.mf.active input{border-color:var(--rani)}
+.sizes{display:flex;gap:6px;flex-wrap:wrap;align-items:center;margin-bottom:12px}
+.sizes span{font-size:.85rem;font-weight:700;margin-right:4px}
+.profiles{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:12px;font-size:.85rem}
+.fitrow{margin-top:14px}
+
+.summary{background:var(--bg);border-radius:14px;padding:14px;display:grid;gap:6px;font-size:.93rem}
+.summary div{display:flex;justify-content:space-between;gap:12px}
+.summary div span:first-child{color:var(--muted)}
+.summary div span:last-child{font-weight:700;text-align:right;min-width:0;overflow-wrap:anywhere}
+.est{font-family:var(--display);font-size:1.5rem;color:var(--rani);font-variant-numeric:tabular-nums}
+.out{background:var(--ok-soft);border-radius:14px;padding:14px;display:grid;gap:10px;margin-top:14px}
+.out pre{white-space:pre-wrap;margin:0;font:12.5px/1.5 ui-monospace,Menlo,monospace;background:var(--surface);padding:10px;border-radius:8px;max-height:260px;overflow:auto}
+.out .acts{display:flex;gap:8px;flex-wrap:wrap}
+.out .acts > *{flex:1}
+.err{color:var(--bad);font-weight:700;font-size:.9rem;margin:10px 0 0}
+.note{font-size:.84rem;color:var(--muted);margin:6px 0 0}
+
+.prices{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:0 28px}
+.price{display:flex;justify-content:space-between;gap:10px;padding:11px 0;border-bottom:1px dashed var(--line)}
+.price b{font-variant-numeric:tabular-nums;color:var(--rani)}
+.how{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.how div{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:16px}
+.how b{font-family:var(--display);font-weight:400;font-size:1.8rem;color:var(--marigold);display:block;line-height:1}
+.how h3{font-size:1.1rem;margin:6px 0 4px}
+.how p{margin:0;color:var(--muted);font-size:.9rem}
+@media (max-width:820px){.how{grid-template-columns:1fr 1fr}}
+@media (max-width:440px){.how{grid-template-columns:1fr}}
+.visit{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.visit dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:8px 16px}
+.visit dt{color:var(--muted);font-size:.78rem;text-transform:uppercase;letter-spacing:.1em;padding-top:3px;font-weight:800}
+.visit dd{margin:0;font-weight:600;min-width:0}
+.visit a{color:var(--rani);font-weight:800}
+@media (max-width:700px){.visit{grid-template-columns:1fr}.visit dl{grid-template-columns:1fr;gap:2px}.visit dd{margin-bottom:8px}}
+footer{padding-block:22px;color:var(--muted);font-size:.86rem;border-top:1px solid var(--line);margin-top:20px}
+.toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(18px + env(safe-area-inset-bottom,0px));background:var(--ink);color:var(--bg);padding:10px 16px;border-radius:12px;font-weight:700;z-index:30;max-width:calc(100% - 32px)}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+</style>
+
+</head>
+<body>
+<header class="bar">
+  <div class="wrap">
+    <div class="logo">Amyra Boutique<small>Ladies tailoring · Gulbarga</small></div>
+    <nav><a href="#order">Stitch an outfit</a><a href="#prices">Prices</a><a href="#visit">Visit</a><a class="btn sm" href="#order">Book now</a></nav>
+  </div>
+  <div class="tape" aria-hidden="true"></div>
+</header>
+
+<section class="hero"><div class="wrap">
+  <div>
+    <div class="eyebrow">Misbah Nagar · Kalaburagi</div>
+    <h1>Stitched to your measurements, the way you like it.</h1>
+    <p>Blouses, salwar suits, Anarkalis, lehengas and abayas, tailored by a family that has stitched for the ladies of Gulbarga for years. Choose your design, enter your measurements and book on WhatsApp.</p>
+    <div class="acts"><a class="btn" href="#order">Start your order</a><a class="btn ghost" href="#prices">See prices</a></div>
+    <div class="trust"><span>Perfect-fit guarantee</span><span>Free alteration in 7 days</span><span>Maggam &amp; hand work</span><span>Urgent stitching</span></div>
+  </div>
+  <svg class="hero-art" width="300" height="300" viewBox="0 0 300 300" aria-hidden="true">
+    <circle cx="150" cy="150" r="140" fill="var(--rani-soft)"/>
+    <path d="M150 40c-14 0-22 8-24 18l-30 10c-14 5-20 16-22 30l-10 70 26 4 10-56 6 160h88l6-160 10 56 26-4-10-70c-2-14-8-25-22-30l-30-10c-2-10-10-18-24-18z" fill="var(--rani)"/>
+    <path d="M126 58c6 18 14 28 24 28s18-10 24-28" fill="none" stroke="var(--marigold)" stroke-width="5"/>
+    <g fill="var(--marigold)"><circle cx="150" cy="120" r="4"/><circle cx="138" cy="140" r="3"/><circle cx="162" cy="140" r="3"/><circle cx="150" cy="160" r="4"/><circle cx="132" cy="250" r="3"/><circle cx="150" cy="250" r="3"/><circle cx="168" cy="250" r="3"/></g>
+    <path d="M40 230c40-30 80 20 120-10s70-10 100 6" fill="none" stroke="var(--tape)" stroke-width="16" stroke-linecap="round"/>
+    <path d="M40 230c40-30 80 20 120-10s70-10 100 6" fill="none" stroke="var(--ink)" stroke-width="16" stroke-dasharray="1.5 7" opacity=".6"/>
+  </svg>
+</div></section>
+
+<section class="block" id="order"><div class="wrap">
+  <div class="head"><h2>Stitch an outfit</h2><p class="sub">Four quick steps. Your measurements stay saved on this phone for next time.</p></div>
+  <nav class="steps" id="steps" aria-label="Order steps">
+    <button data-go="0"><b>1</b><span>Outfit</span></button>
+    <button data-go="1"><b>2</b><span>Design</span></button>
+    <button data-go="2"><b>3</b><span>Measurements</span></button>
+    <button data-go="3"><b>4</b><span>Book</span></button>
+  </nav>
+
+  <div class="card" data-step="0">
+    <h3>What should we stitch?</h3><p class="sub">Pick one outfit. For more than one, send another order after this.</p>
+    <div class="garments" id="garments"></div>
+    <div class="foot"><span></span><button class="btn" data-next>Next: design</button></div>
+  </div>
+
+  <div class="card" data-step="1" hidden>
+    <h3 id="designTitle">Design details</h3><p class="sub">Tap what you like. Have a design photo? Send it in the same WhatsApp chat after booking.</p>
+    <div id="designBody"></div>
+    <div class="optgroup"><p>Fabric</p><div class="chips" data-opt="fabric"></div></div>
+    <div class="optgroup"><label for="dNotes">Anything special?<textarea id="dNotes" rows="2" placeholder="e.g. same design as my sister's blouse, add latkans on the back"></textarea></label></div>
+    <div class="foot"><button class="btn ghost" data-prev>Back</button><button class="btn" data-next>Next: measurements</button></div>
+  </div>
+
+  <div class="card" data-step="2" hidden>
+    <h3>Your measurements</h3><p class="sub">Tap a box to see where to measure on the body map.</p>
+    <div class="method" id="method">
+      <label><input type="radio" name="m" id="mOwn" value="own" checked> <span>I'll enter my measurements<br><small style="color:var(--muted);font-weight:500">Use a soft measuring tape, in inches.</small></span></label>
+      <label><input type="radio" name="m" id="mSample" value="sample"> <span>Copy from my old dress<br><small style="color:var(--muted);font-weight:500">Give us a well-fitting dress and we'll take the size from it.</small></span></label>
+      <label><input type="radio" name="m" id="mShop" value="shop"> <span>Measure me at the boutique<br><small style="color:var(--muted);font-weight:500">Visit us and we'll measure you in 5 minutes.</small></span></label>
+    </div>
+    <div class="measure" id="measureArea">
+      <div class="figure-wrap">
+        <svg class="figure" viewBox="0 0 220 430" role="img" aria-label="Body measurement map">
+          <circle cx="110" cy="34" r="19" fill="var(--rani-soft)"/>
+          <rect x="102" y="52" width="16" height="16" fill="var(--rani-soft)"/>
+          <path d="M70 70h80q12 2 10 18l-8 60q-4 25 2 50l8 60H58l8-60q6-25 2-50l-8-60q-2-16 10-18z" fill="var(--rani-soft)"/>
+          <path d="M66 74L44 190l11 3 21-96zM154 74l22 116-11 3-21-96z" fill="var(--rani-soft)"/>
+          <path d="M72 258l8 140h22l6-128h4l6 128h22l8-140z" fill="var(--rani-soft)"/>
+          <line class="ln" data-m="height" x1="196" y1="15" x2="196" y2="400"/>
+          <line class="ln" data-m="shoulder" x1="64" y1="70" x2="156" y2="70"/>
+          <line class="ln" data-m="bust" x1="60" y1="108" x2="160" y2="108"/>
+          <line class="ln" data-m="underbust" x1="62" y1="126" x2="158" y2="126"/>
+          <line class="ln" data-m="waist" x1="68" y1="152" x2="152" y2="152"/>
+          <line class="ln" data-m="hip" x1="64" y1="205" x2="156" y2="205"/>
+          <line class="ln" data-m="topLen" x1="172" y1="70" x2="172" y2="258"/>
+          <line class="ln" data-m="blouseLen" x1="172" y1="70" x2="172" y2="134"/>
+          <line class="ln" data-m="sleeveLen" x1="66" y1="74" x2="47" y2="186"/>
+          <ellipse class="ln" data-m="armhole" cx="70" cy="86" rx="9" ry="16"/>
+          <line class="ln" data-m="upperArm" x1="52" y1="118" x2="70" y2="118"/>
+          <line class="ln" data-m="sleeveOpen" x1="43" y1="184" x2="56" y2="187"/>
+          <line class="ln" data-m="frontNeck" x1="110" y1="66" x2="110" y2="100"/>
+          <line class="ln" data-m="backNeck" x1="116" y1="66" x2="116" y2="110" stroke-dasharray="4 3"/>
+          <line class="ln" data-m="apex" x1="92" y1="110" x2="128" y2="110"/>
+          <line class="ln" data-m="shoulderApex" x1="86" y1="70" x2="92" y2="110"/>
+          <circle class="pt" data-p="apex shoulderApex" cx="92" cy="110" r="3.5"/><circle class="pt" data-p="apex" cx="128" cy="110" r="3.5"/>
+          <line class="ln" data-m="bottomLen" x1="24" y1="152" x2="24" y2="400"/>
+          <line class="ln" data-m="thigh" x1="74" y1="282" x2="108" y2="282"/>
+          <line class="ln" data-m="knee" x1="77" y1="330" x2="105" y2="330"/>
+          <line class="ln" data-m="ankle" x1="80" y1="396" x2="102" y2="396"/>
+        </svg>
+        <div class="tip" id="tip"><b>Tap a measurement</b>The pink line shows where to place the tape.</div>
+      </div>
+      <div style="min-width:0">
+        <div class="profiles" id="profiles"></div>
+        <div class="sizes" id="sizes"><span>Start from a size:</span></div>
+        <div class="mfields" id="mfields"></div>
+        <div class="optgroup fitrow"><p>How should it fit?</p><div class="chips" data-opt="fit"></div></div>
+      </div>
+    </div>
+    <p class="note" id="mNote" hidden></p>
+    <div class="foot"><button class="btn ghost" data-prev>Back</button><button class="btn" data-next>Next: book</button></div>
+  </div>
+
+  <div class="card" data-step="3" hidden>
+    <h3>Book your stitching</h3><p class="sub">We confirm on WhatsApp with the final price and delivery date.</p>
+    <div class="row2" style="margin-top:14px">
+      <div style="display:grid;gap:12px;align-content:start">
+        <div class="row2"><label for="bName">Your name<input id="bName" autocomplete="name"></label><label for="bPhone">Mobile<input id="bPhone" inputmode="tel" autocomplete="tel" placeholder="10-digit number"></label></div>
+        <div class="row2"><label for="bDate">Need it by<input type="date" id="bDate"></label><label for="bQty">Quantity<input id="bQty" inputmode="numeric" value="1"></label></div>
+        <label for="bOccasion">Occasion<select id="bOccasion"><option>Daily wear</option><option>Wedding</option><option>Eid / festival</option><option>Engagement / Nikah</option><option>Party / function</option><option>Office / college</option></select></label>
+        <label for="bFabric">How will you give the fabric?<select id="bFabric"><option>I'll drop it at the boutique</option><option>Please pick it up from my home (Gulbarga)</option><option>Boutique will arrange the fabric</option></select></label>
+        <label for="bAddr">Address (only for pickup / delivery)<textarea id="bAddr" rows="2" placeholder="House, street, area, landmark"></textarea></label>
+      </div>
+      <div style="display:grid;gap:12px;align-content:start">
+        <div class="summary" id="summary"></div>
+        <div><span class="note" style="margin:0">Estimated stitching charge</span><div class="est" id="est"></div><p class="note" id="estNote"></p></div>
+        <button class="btn" id="bookBtn" type="button">Book on WhatsApp</button>
+        <p class="err" id="bErr" hidden></p>
+      </div>
+    </div>
+    <div class="out" id="out" hidden>
+      <strong>Your order is ready to send</strong>
+      <pre id="msg"></pre>
+      <div class="acts"><a class="btn" id="waLink" href="#" target="_blank" rel="noopener">Open WhatsApp</a><button class="btn ghost" id="copyBtn" type="button">Copy message</button></div>
+      <p class="note">If WhatsApp doesn't open, copy the message and send it to <span id="phoneShow2"></span>. Send your fabric and design photos in the same chat.</p>
+    </div>
+    <div class="foot"><button class="btn ghost" data-prev>Back</button><span></span></div>
+  </div>
+</div></section>
+
+<section class="block" id="how"><div class="wrap">
+  <div class="head"><h2>How it works</h2></div>
+  <div class="how">
+    <div><b>1</b><h3>Book online</h3><p>Pick your outfit and design, add measurements, send on WhatsApp.</p></div>
+    <div><b>2</b><h3>We confirm</h3><p>We reply with the final price and a delivery date.</p></div>
+    <div><b>3</b><h3>Give the fabric</h3><p>Drop it at the boutique or we pick it up in Gulbarga.</p></div>
+    <div><b>4</b><h3>Trial &amp; collect</h3><p>Try it on. Any fitting change is free within 7 days.</p></div>
+  </div>
+</div></section>
+
+<section class="block" id="prices"><div class="wrap">
+  <div class="head"><h2>Stitching prices</h2><p class="sub">Starting prices for stitching only. Lining, padding and work are extra and confirmed on WhatsApp.</p></div>
+  <div class="card"><div class="prices" id="priceList"></div></div>
+</div></section>
+
+<section class="block" id="visit"><div class="wrap">
+  <div class="card visit">
+    <div><h2 style="font-size:1.8rem;margin-bottom:12px">Visit the boutique</h2>
+      <dl>
+        <dt>Address</dt><dd>Amyra Boutique Center, near HiFi Gym, Misbah Nagar, Kalaburagi (Gulbarga), Karnataka<br><a href="https://www.google.com/maps/search/?api=1&amp;query=Amyra+Boutique+Center+Misbah+Nagar+Gulbarga" target="_blank" rel="noopener">Open in Google Maps ↗</a></dd>
+        <dt>WhatsApp</dt><dd id="phoneShow">+91 72597 83363</dd>
+        <dt>Timings</dt><dd>Mon – Sat, 10:30 am – 8:30 pm</dd>
+      </dl>
+    </div>
+    <div><h3 style="font-size:1.3rem;margin-bottom:8px">Good to know</h3>
+      <ul style="margin:0;padding-left:20px;color:var(--muted);display:grid;gap:6px">
+        <li>Normal delivery in 5–7 days. Urgent stitching in 2 days for an extra charge.</li>
+        <li>Wedding and Eid season fills up fast. Book 2–3 weeks early.</li>
+        <li>Bring a well-fitting dress if you're not sure of your measurements.</li>
+        <li>Ladies tailoring by women, with a private trial room.</li>
+      </ul>
+    </div>
+  </div>
+</div></section>
+<footer><div class="wrap">© <span id="yr"></span> Amyra Boutique · Misbah Nagar, Gulbarga</div></footer>
+<div class="toast" id="toast" hidden></div>
+
+<script>
+const SHOP = { wa: "917259783363", show: "+91 72597 83363" };
+
+const M = {
+  height:{n:"Height",t:"Stand straight against a wall without footwear. Measure from the top of the head to the floor."},
+  bust:{n:"Bust",t:"Around the fullest part of the chest, keeping the tape level under the arms."},
+  underbust:{n:"Under bust",t:"Around the ribcage, just below the bust."},
+  waist:{n:"Waist",t:"Around the natural waist, the narrowest part above the navel. Keep one finger inside the tape."},
+  hip:{n:"Hip",t:"Around the fullest part of the hips, with feet together."},
+  shoulder:{n:"Shoulder",t:"Across the back, from one shoulder tip to the other."},
+  topLen:{n:"Top length",t:"From the highest point of the shoulder (near the neck) down to where you want the kurta or dress to end."},
+  blouseLen:{n:"Blouse length",t:"From the highest point of the shoulder down to where the blouse should end, below the bust."},
+  sleeveLen:{n:"Sleeve length",t:"From the shoulder tip down the arm to where the sleeve should end."},
+  armhole:{n:"Armhole",t:"Around the shoulder joint, passing under the armpit. Keep it slightly loose."},
+  upperArm:{n:"Upper arm",t:"Around the fullest part of the upper arm (biceps)."},
+  sleeveOpen:{n:"Sleeve opening",t:"Around the arm where the sleeve ends (elbow or wrist)."},
+  frontNeck:{n:"Front neck depth",t:"From the base of the neck at the shoulder down to where the front neckline should sit."},
+  backNeck:{n:"Back neck depth",t:"From the base of the neck at the back down to where the back neckline should sit."},
+  apex:{n:"Apex to apex",t:"Straight across from one bust point to the other."},
+  shoulderApex:{n:"Shoulder to apex",t:"From the shoulder near the neck down to the bust point."},
+  bottomLen:{n:"Bottom length",t:"From the waist down to the ankle, or wherever the salwar, skirt or lehenga should end."},
+  thigh:{n:"Thigh",t:"Around the fullest part of one thigh."},
+  knee:{n:"Knee",t:"Around the knee, slightly bent."},
+  ankle:{n:"Bottom opening",t:"Around the ankle or the opening you want at the bottom of the salwar or pant."}
+};
+
+const NECKS = {
+  round:"M14 10q10 14 20 0", v:"M14 10l10 18 10-18", boat:"M8 12q16 6 32 0", square:"M15 10v14h18V10",
+  sweetheart:"M14 10v10q0 6 5 6t5-5q0 5 5 5t5-6V10", collar:"M14 10l10 10 10-10M14 10l-2 8 8 2M34 10l2 8-8 2",
+  keyhole:"M14 10q10 8 20 0M24 14v10", high:"M17 6h14v6q-7 3-14 0z", ushape:"M14 10v8q0 10 10 10t10-10v-8"
+};
+const NECK_NAMES = {round:"Round",v:"V neck",boat:"Boat",square:"Square",sweetheart:"Sweetheart",collar:"Collar",keyhole:"Keyhole",high:"High neck",ushape:"Deep U"};
+
+const G = [
+  {id:"blouse",n:"Saree blouse",from:300,icon:"M14 18l10-8h16l10 8-4 10-6-3v13H24V25l-6 3z",
+    m:["bust","underbust","waist","shoulder","blouseLen","armhole","sleeveLen","upperArm","sleeveOpen","frontNeck","backNeck","apex","shoulderApex"],
+    d:{neck:1,back:1,sleeve:1,lining:1,padding:1,opening:["Front hooks","Back hooks","Side zip"],work:1}},
+  {id:"suit",n:"Salwar / Churidar suit",from:450,icon:"M20 8h24l6 10-4 4-2-4v40H20V18l-2 4-4-4z",
+    m:["height","bust","waist","hip","shoulder","topLen","armhole","sleeveLen","upperArm","sleeveOpen","frontNeck","backNeck","bottomLen","thigh","knee","ankle"],
+    d:{neck:1,sleeve:1,lining:1,bottom:["Salwar","Churidar","Patiala","Straight pant","Palazzo"],slit:1,opening:["Side zip","Back zip","No zip"],work:1}},
+  {id:"kurti",n:"Kurti / Kurta",from:300,icon:"M20 8h24l6 10-4 4-2-4v38H20V18l-2 4-4-4z",
+    m:["height","bust","waist","hip","shoulder","topLen","armhole","sleeveLen","upperArm","sleeveOpen","frontNeck","backNeck"],
+    d:{neck:1,sleeve:1,lining:1,slit:1,opening:["Side zip","Back zip","No zip"],work:1}},
+  {id:"anarkali",n:"Anarkali / Gown",from:750,icon:"M24 8h16l4 10-4 8 16 32H8l16-32-4-8z",
+    m:["height","bust","waist","hip","shoulder","topLen","armhole","sleeveLen","upperArm","sleeveOpen","frontNeck","backNeck","bottomLen"],
+    d:{neck:1,sleeve:1,lining:1,flare:["Medium flare","Full flare (kalis)","A-line"],opening:["Back zip","Side zip"],work:1}},
+  {id:"lehenga",n:"Lehenga choli",from:1500,icon:"M22 8h20v12H22zM20 24h24l12 34H8z",
+    m:["bust","underbust","waist","hip","shoulder","blouseLen","armhole","sleeveLen","upperArm","frontNeck","backNeck","bottomLen"],
+    d:{neck:1,back:1,sleeve:1,lining:1,padding:1,flare:["A-line","Full circle","Mermaid","Kalidar"],work:1}},
+  {id:"sharara",n:"Sharara / Gharara set",from:900,icon:"M20 8h24v20H20zM18 30h12l-6 28H10zM34 30h12l8 28H40z",
+    m:["height","bust","waist","hip","shoulder","topLen","armhole","sleeveLen","frontNeck","backNeck","bottomLen","thigh"],
+    d:{neck:1,sleeve:1,lining:1,opening:["Side zip","Back zip"],work:1}},
+  {id:"abaya",n:"Abaya / Burqa",from:600,icon:"M24 6h16l6 8 10 44H8l10-44z",
+    m:["height","bust","hip","shoulder","topLen","sleeveLen","sleeveOpen"],
+    d:{abaya:["Front open","Closed (pull-on)","Umbrella cut","Kaftan style"],sleeve:1,work:1}},
+  {id:"frock",n:"Kids frock",from:300,icon:"M24 10h16l2 10 12 30H10l12-30z",
+    m:["height","bust","waist","shoulder","topLen","sleeveLen"],
+    d:{neck:1,sleeve:1,lining:1,opening:["Back zip","Back buttons"]}},
+  {id:"alter",n:"Alteration / repair",from:80,icon:"M12 46l26-26M38 20l8-8 6 6-8 8M14 14l36 36",
+    m:[], d:{alter:["Loosen / tighten","Shorten length","Change sleeves","Change neck","Fall & pico (saree)","Other"]}}
+];
+
+const SIZES = {S:{bust:34,waist:28,hip:36,shoulder:14,armhole:15,upperArm:11},M:{bust:36,waist:30,hip:38,shoulder:14.5,armhole:16,upperArm:12},L:{bust:38,waist:32,hip:40,shoulder:15,armhole:17,upperArm:13},XL:{bust:40,waist:34,hip:42,shoulder:15.5,armhole:18,upperArm:14},XXL:{bust:42,waist:36,hip:44,shoulder:16,armhole:19,upperArm:15}};
+
+const OPTS = {
+  back:["Deep U","Deep V","Keyhole","Window","Dori with tassels","Same as front"],
+  sleeve:["Sleeveless","Cap","Short","Elbow","3/4","Full","Puff","Bell"],
+  lining:["With lining","No lining"], padding:["With padding","No padding"],
+  slit:["Side slits","Front slit","No slit"],
+  work:["Plain","Piping","Lace border","Maggam work","Mirror / sequins","Hand embroidery"],
+  fabric:["Cotton","Silk","Georgette / chiffon","Rayon","Net","Velvet","Not sure"],
+  fit:["Body fit","Regular fit","Loose fit"]
+};
+const PRICE_ADD = {"With lining":100,"With padding":150,"Maggam work":800,"Hand embroidery":600,"Mirror / sequins":300,"Lace border":80,"Piping":50,"Dori with tassels":80,"Puff":50,"Bell":50};
+
+let S = { step:0, g:"blouse", sel:{}, meas:{}, method:"own" };
+const $ = s => document.querySelector(s), $$ = s => [...document.querySelectorAll(s)];
+const esc = v => String(v ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const rupee = n => "₹" + Number(n).toLocaleString("en-IN");
+const store = { get(k,d){ try{ return JSON.parse(localStorage.getItem(k)) ?? d; }catch(e){ return d; } }, set(k,v){ try{ localStorage.setItem(k, JSON.stringify(v)); }catch(e){} } };
+let tt; const toast = t => { const e=$("#toast"); e.textContent=t; e.hidden=false; clearTimeout(tt); tt=setTimeout(()=>e.hidden=true,3000); };
+const garment = () => G.find(x => x.id === S.g);
+
+$("#yr").textContent = new Date().getFullYear();
+$("#phoneShow").textContent = SHOP.show; $("#phoneShow2").textContent = SHOP.show;
+
+/* step 1 */
+function renderGarments(){
+  $("#garments").innerHTML = G.map(g => `<button class="g" data-g="${g.id}" aria-pressed="${g.id===S.g}">
+    <svg viewBox="0 0 64 64" aria-hidden="true"><path d="${g.icon}" fill="${g.id==="alter"?"none":"var(--rani)"}" stroke="var(--rani)" stroke-width="${g.id==="alter"?4:1}" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    <b>${g.n}</b><span>from ${rupee(g.from)}</span></button>`).join("");
+  $("#priceList").innerHTML = G.map(g => `<div class="price"><span>${g.n}</span><b>from ${rupee(g.from)}</b></div>`).join("")
+    + `<div class="price"><span>Lining</span><b>+ ${rupee(100)}</b></div><div class="price"><span>Blouse padding</span><b>+ ${rupee(150)}</b></div><div class="price"><span>Maggam work</span><b>from ${rupee(800)}</b></div><div class="price"><span>Urgent (2 days)</span><b>+ ${rupee(200)}</b></div>`;
+}
+$("#garments").onclick = e => { const b = e.target.closest("[data-g]"); if(!b) return; S.g = b.dataset.g; S.sel = {}; renderGarments(); };
+
+/* step 2 */
+function chipRow(key, list){ return `<div class="chips" data-opt="${key}">${list.map(o=>`<button class="chip" data-v="${esc(o)}" aria-pressed="${S.sel[key]===o}">${esc(o)}</button>`).join("")}</div>`; }
+function neckGrid(key){ return `<div class="necks" data-opt="${key}">${Object.keys(NECKS).map(k=>`<button class="neck" data-v="${NECK_NAMES[k]}" aria-pressed="${S.sel[key]===NECK_NAMES[k]}"><svg viewBox="0 0 48 48" aria-hidden="true"><path d="M8 8h32l4 8-4 4v22H8V20l-4-4z" fill="var(--rani-soft)" stroke="var(--muted)" stroke-width="1.2"/><path d="${NECKS[k]}" fill="var(--surface)" stroke="var(--rani)" stroke-width="2.2" stroke-linejoin="round"/></svg>${NECK_NAMES[k]}</button>`).join("")}</div>`; }
+function renderDesign(){
+  const g = garment(), d = g.d; let h = "";
+  $("#designTitle").textContent = g.n + " design";
+  if (d.alter) h += `<div class="optgroup"><p>What needs to be done?</p>${chipRow("alter", d.alter)}</div>`;
+  if (d.abaya) h += `<div class="optgroup"><p>Abaya style</p>${chipRow("abaya", d.abaya)}</div>`;
+  if (d.neck) h += `<div class="optgroup"><p>Front neck</p>${neckGrid("neck")}</div>`;
+  if (d.back) h += `<div class="optgroup"><p>Back neck</p>${chipRow("back", OPTS.back)}</div>`;
+  if (d.sleeve) h += `<div class="optgroup"><p>Sleeves</p>${chipRow("sleeve", OPTS.sleeve)}</div>`;
+  if (d.bottom) h += `<div class="optgroup"><p>Bottom</p>${chipRow("bottom", d.bottom)}</div>`;
+  if (d.flare) h += `<div class="optgroup"><p>Flare</p>${chipRow("flare", d.flare)}</div>`;
+  if (d.slit) h += `<div class="optgroup"><p>Slit</p>${chipRow("slit", OPTS.slit)}</div>`;
+  if (d.lining) h += `<div class="optgroup"><p>Lining</p>${chipRow("lining", OPTS.lining)}</div>`;
+  if (d.padding) h += `<div class="optgroup"><p>Padding</p>${chipRow("padding", OPTS.padding)}</div>`;
+  if (d.opening) h += `<div class="optgroup"><p>Opening</p>${chipRow("opening", d.opening)}</div>`;
+  if (d.work) h += `<div class="optgroup"><p>Work &amp; finishing</p>${chipRow("work", OPTS.work)}</div>`;
+  $("#designBody").innerHTML = h;
+  $$('[data-opt="fabric"]').forEach(el => el.outerHTML = chipRow("fabric", OPTS.fabric));
+}
+document.addEventListener("click", e => {
+  const c = e.target.closest("[data-opt] [data-v]"); if(!c) return;
+  const key = c.closest("[data-opt]").dataset.opt, v = c.dataset.v;
+  S.sel[key] = S.sel[key] === v ? undefined : v;
+  c.closest("[data-opt]").querySelectorAll("[data-v]").forEach(b => b.setAttribute("aria-pressed", S.sel[key] === b.dataset.v));
+});
+
+/* step 3 */
+function renderMeasure(){
+  const g = garment();
+  const hide = S.method !== "own" || !g.m.length;
+  $("#measureArea").hidden = hide;
+  $("#mNote").hidden = !hide;
+  $("#mNote").textContent = !g.m.length ? "No measurements needed for alterations. Bring the dress to the boutique or ask us to pick it up."
+    : S.method === "sample" ? "Great. Give us a dress that fits you well along with your fabric, and we'll copy the measurements from it."
+    : S.method === "shop" ? "Visit Amyra Boutique any day except Sunday. We'll take your measurements in about 5 minutes." : "";
+  $("#mfields").innerHTML = g.m.map(k => `<div class="mf" data-mf="${k}"><label for="m_${k}">${M[k].n}<span class="unit"><input id="m_${k}" inputmode="decimal" placeholder="—" value="${esc(S.meas[k] ?? "")}"></span></label></div>`).join("");
+  $("#sizes").innerHTML = `<span>Start from a size:</span>` + Object.keys(SIZES).map(s => `<button class="chip" data-size="${s}">${s}</button>`).join("");
+  $$('.fitrow [data-opt="fit"]').forEach(el => el.outerHTML = chipRow("fit", OPTS.fit));
+  renderProfiles();
+}
+function highlight(k){
+  $$(".figure .ln").forEach(l => l.classList.toggle("on", l.dataset.m === k));
+  $$(".figure .pt").forEach(p => p.classList.toggle("on", (p.dataset.p || "").split(" ").includes(k)));
+  $$(".mf").forEach(f => f.classList.toggle("active", f.dataset.mf === k));
+  $("#tip").innerHTML = `<b>${esc(M[k].n)}</b>${esc(M[k].t)}`;
+}
+$("#mfields").addEventListener("focusin", e => { const f = e.target.closest("[data-mf]"); if (f) highlight(f.dataset.mf); });
+$("#mfields").addEventListener("input", e => { const f = e.target.closest("[data-mf]"); if (!f) return; const v = e.target.value.replace(/[^\d.]/g, ""); e.target.value = v; S.meas[f.dataset.mf] = v; });
+$("#sizes").onclick = e => { const b = e.target.closest("[data-size]"); if(!b) return; Object.entries(SIZES[b.dataset.size]).forEach(([k,v]) => { if (garment().m.includes(k)) S.meas[k] = String(v); }); renderMeasure(); toast(`Filled standard ${b.dataset.size} size. Please adjust to your body.`); };
+$("#method").onchange = e => { S.method = e.target.value; renderMeasure(); };
+
+function renderProfiles(){
+  const p = store.get("amyra-profiles", {}), names = Object.keys(p);
+  $("#profiles").innerHTML = (names.length ? `<span style="font-weight:700">Saved on this phone:</span>` + names.map(n => `<button class="chip" data-prof="${esc(n)}">${esc(n)}</button>`).join("") : "")
+    + `<button class="chip" id="saveProf" type="button">Save these measurements</button><input id="profName" placeholder="Name, e.g. Me / Ayesha" style="max-width:190px;padding:7px 10px" hidden>`;
+}
+$("#profiles").addEventListener("click", e => {
+  const pb = e.target.closest("[data-prof]");
+  if (pb) { const p = store.get("amyra-profiles", {}); S.meas = { ...S.meas, ...p[pb.dataset.prof] }; renderMeasure(); toast(`Loaded ${pb.dataset.prof}'s measurements.`); return; }
+  if (e.target.id === "saveProf") {
+    const inp = $("#profName");
+    if (inp.hidden) { inp.hidden = false; inp.focus(); e.target.textContent = "Save"; return; }
+    const n = inp.value.trim(); if (!n) { inp.focus(); return; }
+    const p = store.get("amyra-profiles", {}); p[n] = { ...(p[n] || {}), ...S.meas }; store.set("amyra-profiles", p);
+    renderProfiles(); toast(`Saved as "${n}" on this phone.`);
+  }
+});
+
+/* step 4 */
+function estimate(){
+  const g = garment(); let t = g.from;
+  Object.values(S.sel).forEach(v => { if (PRICE_ADD[v]) t += PRICE_ADD[v]; });
+  const qty = Math.max(1, parseInt($("#bQty").value) || 1);
+  return t * qty;
+}
+function renderSummary(){
+  const g = garment();
+  const rows = [["Outfit", g.n]];
+  Object.entries(S.sel).forEach(([k,v]) => { if (v) rows.push([k === "neck" ? "Front neck" : k === "back" ? "Back neck" : k[0].toUpperCase() + k.slice(1), v]); });
+  const filled = g.m.filter(k => S.meas[k]).length;
+  rows.push(["Measurements", S.method === "own" ? (g.m.length ? `${filled} of ${g.m.length} filled` : "Not needed") : S.method === "sample" ? "From old dress" : "At the boutique"]);
+  $("#summary").innerHTML = rows.map(([a,b]) => `<div><span>${esc(a)}</span><span>${esc(b)}</span></div>`).join("");
+  $("#est").textContent = "from " + rupee(estimate());
+  $("#estNote").textContent = "Final price depends on fabric and design. We confirm before stitching.";
+}
+$("#bQty").oninput = renderSummary;
+const pad = n => String(n).padStart(2,"0");
+const d0 = new Date(); d0.setDate(d0.getDate() + 2);
+$("#bDate").min = `${d0.getFullYear()}-${pad(d0.getMonth()+1)}-${pad(d0.getDate())}`;
+
+$("#bookBtn").onclick = () => {
+  const name = $("#bName").value.trim(), phone = $("#bPhone").value.replace(/\D/g, ""), err = $("#bErr"), g = garment();
+  if (!name || phone.length < 10) { err.textContent = "Please enter your name and a 10-digit mobile number."; err.hidden = false; return; }
+  if ($("#bFabric").value.startsWith("Please pick") && !$("#bAddr").value.trim()) { err.textContent = "Please add your address so we can pick up the fabric."; err.hidden = false; return; }
+  err.hidden = true;
+  const qty = Math.max(1, parseInt($("#bQty").value) || 1);
+  const by = $("#bDate").value ? new Date($("#bDate").value + "T00:00").toLocaleDateString("en-IN", {day:"numeric", month:"short", year:"numeric"}) : "Normal delivery";
+  let msg = `Hello Amyra Boutique, I want to book stitching.\n\n*${g.n}* × ${qty}\nOccasion: ${$("#bOccasion").value}\nNeed by: ${by}`;
+  const design = Object.entries(S.sel).filter(([,v]) => v).map(([k,v]) => `• ${k === "neck" ? "Front neck" : k === "back" ? "Back neck" : k[0].toUpperCase()+k.slice(1)}: ${v}`);
+  if (design.length) msg += `\n\n*Design*\n` + design.join("\n");
+  if ($("#dNotes").value.trim()) msg += `\n• Notes: ${$("#dNotes").value.trim()}`;
+  if (g.m.length) {
+    msg += `\n\n*Measurements (inches)*\n`;
+    if (S.method === "own") {
+      const ms = g.m.filter(k => S.meas[k]).map(k => `• ${M[k].n}: ${S.meas[k]}`);
+      msg += ms.length ? ms.join("\n") : "Will share later";
+    } else msg += S.method === "sample" ? "I'll give an old dress for size" : "Please measure me at the boutique";
+  }
+  msg += `\n\nFabric: ${$("#bFabric").value}`;
+  if ($("#bAddr").value.trim()) msg += `\nAddress: ${$("#bAddr").value.trim()}`;
+  msg += `\n\nName: ${name}\nMobile: ${phone}\nEstimate shown: from ${rupee(estimate())}`;
+  $("#msg").textContent = msg;
+  $("#waLink").href = `https://wa.me/${SHOP.wa}?text=${encodeURIComponent(msg)}`;
+  $("#out").hidden = false; $("#out").scrollIntoView({behavior:"smooth", block:"nearest"});
+  store.set("amyra-me", { name, phone });
+};
+$("#copyBtn").onclick = () => {
+  const b = $("#copyBtn");
+  const sel = () => { const r = document.createRange(); r.selectNodeContents($("#msg")); const s = getSelection(); s.removeAllRanges(); s.addRange(r); b.textContent = "Selected – press copy"; };
+  try { navigator.clipboard.writeText($("#msg").textContent).then(() => b.textContent = "Copied", sel); } catch (e) { sel(); }
+};
+const me = store.get("amyra-me", null); if (me) { $("#bName").value = me.name || ""; $("#bPhone").value = me.phone || ""; }
+
+/* stepper */
+function go(n){
+  S.step = Math.max(0, Math.min(3, n));
+  $$("[data-step]").forEach(c => c.hidden = +c.dataset.step !== S.step);
+  $$("#steps button").forEach((b,i) => { b.toggleAttribute("aria-current", false); if (i === S.step) b.setAttribute("aria-current","step"); b.classList.toggle("done", i < S.step); });
+  if (S.step === 1) renderDesign();
+  if (S.step === 2) renderMeasure();
+  if (S.step === 3) renderSummary();
+  $("#order").scrollIntoView({behavior:"smooth", block:"start"});
+}
+document.addEventListener("click", e => {
+  if (e.target.closest("[data-next]")) go(S.step + (S.step === 1 && !garment().m.length ? 2 : 1));
+  else if (e.target.closest("[data-prev]")) go(S.step - (S.step === 3 && !garment().m.length ? 2 : 1));
+  else { const s = e.target.closest("[data-go]"); if (s) go(+s.dataset.go); }
+});
+
+renderGarments();
+$$("[data-step]").forEach(c => c.hidden = +c.dataset.step !== 0);
+$("#steps button").setAttribute("aria-current","step");
+</script>
+
+</body>
+</html>
