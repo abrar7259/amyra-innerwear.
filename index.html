@@ -1,0 +1,350 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Kalaburagi Comfort Innerwear</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&display=swap">
+<style>
+/* Layout: sticky shop bar, compact hero with category split, filterable product grid, slide-in cart drawer with WhatsApp checkout */
+:root{
+  --bg:#f6f7fb; --surface:#ffffff; --ink:#1c1b3a; --muted:#5d5c7a; --line:#dfe0ec;
+  --plum:#4b2a7b; --plum-ink:#ffffff; --mint:#c9f0de; --blush:#ffd9e2; --sky:#d6e6ff;
+  --ok:#1d7a4f;
+  --display:"Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --body:"DM Sans", "Segoe UI", system-ui, sans-serif;
+  --r:14px;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#12111f; --surface:#1c1a2e; --ink:#eeeaf8; --muted:#a6a2c0; --line:#302d48;
+  --plum:#b89af0; --plum-ink:#16132a; --mint:#1f4a3a; --blush:#4c2533; --sky:#22325a; --ok:#6fd6a3; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#12111f; --surface:#1c1a2e; --ink:#eeeaf8; --muted:#a6a2c0; --line:#302d48;
+  --plum:#b89af0; --plum-ink:#16132a; --mint:#1f4a3a; --blush:#4c2533; --sky:#22325a; --ok:#6fd6a3; color-scheme:dark}
+
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font:16px/1.55 var(--body);margin:0}
+h1,h2,h3{font-family:var(--display);text-wrap:balance;margin:0;line-height:1.1}
+button{font:inherit;cursor:pointer}
+:focus-visible{outline:3px solid var(--plum);outline-offset:2px}
+.wrap{max-width:1120px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--surface)}
+header.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:9;background:var(--surface);border-bottom:1px solid var(--line)}
+.bar .wrap{display:flex;align-items:center;gap:16px;padding-block:12px}
+.logo{display:flex;align-items:center;gap:10px;font-family:var(--display);font-weight:800;font-size:1.15rem;letter-spacing:-.01em}
+.logo svg{flex:none}
+.logo small{display:block;font:500 .72rem var(--body);color:var(--muted);letter-spacing:.06em;text-transform:uppercase}
+.bar nav{margin-left:auto;display:flex;gap:18px;align-items:center}
+.bar nav a{color:var(--ink);text-decoration:none;font-weight:500}
+.bar nav a:hover{color:var(--plum)}
+.cart-btn{display:flex;align-items:center;gap:8px;background:var(--plum);color:var(--plum-ink);border:0;border-radius:999px;padding:9px 16px;font-weight:700}
+.cart-btn b{background:var(--plum-ink);color:var(--plum);border-radius:999px;min-width:22px;padding:0 6px;font-size:.8rem;text-align:center}
+@media (max-width:640px){.bar nav a{display:none}}
+
+.hero{padding-block:44px 28px}
+.hero .wrap{display:grid;grid-template-columns:1.2fr 1fr;gap:32px;align-items:center}
+.hero .kn{font-weight:700;color:var(--plum);letter-spacing:.04em}
+.hero h1{font-size:clamp(2.1rem,5.2vw,3.6rem);font-weight:800;letter-spacing:-.025em;margin-top:8px}
+.hero p{color:var(--muted);max-width:52ch;font-size:1.08rem;margin:14px 0 22px}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:6px 12px;font-size:.88rem;font-weight:500}
+.split{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.split button{border:0;border-radius:var(--r);padding:22px 18px;text-align:left;color:var(--ink);display:flex;flex-direction:column;gap:10px;min-height:210px;transition:transform .2s}
+.split button:hover{transform:translateY(-3px)}
+.split .m{background:var(--sky)} .split .w{background:var(--blush)}
+.split h2{font-size:1.6rem}
+.split span{font-size:.9rem;color:var(--muted)}
+.split svg{margin-top:auto;align-self:flex-end}
+@media (max-width:820px){.hero .wrap{grid-template-columns:1fr}}
+
+.shop{padding-block:24px 56px}
+.shop-head{display:flex;flex-wrap:wrap;align-items:end;justify-content:space-between;gap:16px;margin-bottom:20px}
+.shop-head h2{font-size:clamp(1.6rem,3.4vw,2.2rem)}
+.tabs{display:flex;background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:4px}
+.tabs button{border:0;background:none;color:var(--ink);padding:8px 16px;border-radius:999px;font-weight:500}
+.tabs button[aria-pressed="true"]{background:var(--plum);color:var(--plum-ink)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:18px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);overflow:hidden;display:flex;flex-direction:column}
+.card .pic{aspect-ratio:4/3;max-width:100%;display:grid;place-items:center;position:relative}
+.card .tag{position:absolute;top:10px;left:10px;background:var(--surface);border-radius:999px;padding:2px 10px;font-size:.75rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase}
+.card .body{padding:14px 16px 16px;display:flex;flex-direction:column;gap:10px;flex:1}
+.card h3{font-size:1.1rem;font-weight:700}
+.card .desc{color:var(--muted);font-size:.9rem;margin:0}
+.price{font-family:var(--display);font-weight:800;font-size:1.25rem;font-variant-numeric:tabular-nums}
+.price s{font:400 .85rem var(--body);color:var(--muted);margin-left:6px}
+.sizes{display:flex;flex-wrap:wrap;gap:6px}
+.sizes button{border:1px solid var(--line);background:var(--bg);color:var(--ink);border-radius:8px;min-width:40px;padding:4px 8px;font-size:.85rem;font-weight:500}
+.sizes button[aria-pressed="true"]{border-color:var(--plum);background:var(--plum);color:var(--plum-ink)}
+.add{margin-top:auto;border:0;border-radius:10px;padding:10px;background:var(--ink);color:var(--bg);font-weight:700}
+.add.done{background:var(--ok);color:var(--surface)}
+
+.info{background:var(--surface);border-block:1px solid var(--line);padding-block:40px}
+.info .wrap{display:grid;grid-template-columns:repeat(4,1fr);gap:24px}
+.info h3{font-size:1.05rem;margin-bottom:6px}
+.info p{color:var(--muted);margin:0;font-size:.93rem}
+@media (max-width:820px){.info .wrap{grid-template-columns:1fr 1fr}}
+@media (max-width:460px){.info .wrap{grid-template-columns:1fr}}
+
+.contact{padding-block:44px}
+.contact .wrap{display:grid;grid-template-columns:1fr 1fr;gap:28px}
+.contact h2{font-size:1.8rem;margin-bottom:10px}
+.contact dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:8px 16px}
+.contact dt{color:var(--muted);font-size:.85rem;text-transform:uppercase;letter-spacing:.06em;padding-top:2px}
+.contact dd{margin:0;font-weight:500;min-width:0}
+.areas{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+@media (max-width:720px){.contact .wrap{grid-template-columns:1fr}}
+footer{padding-block:24px;color:var(--muted);font-size:.85rem;border-top:1px solid var(--line)}
+
+/* cart drawer */
+.scrim{position:fixed;inset:0;background:rgba(10,8,25,.45);z-index:20}
+.drawer{position:fixed;top:0;right:0;bottom:0;width:min(440px,100%);background:var(--surface);z-index:21;display:flex;flex-direction:column;
+  padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);padding-right:env(safe-area-inset-right,0px);box-shadow:-10px 0 40px rgba(0,0,0,.2)}
+.drawer .top{display:flex;justify-content:space-between;align-items:center;padding:16px 20px;border-bottom:1px solid var(--line)}
+.drawer .top h2{font-size:1.4rem}
+.x{border:0;background:var(--bg);color:var(--ink);border-radius:999px;width:36px;height:36px;font-size:1.2rem}
+.drawer .scroll{overflow:auto;padding:16px 20px;flex:1;display:flex;flex-direction:column;gap:14px}
+.line{display:grid;grid-template-columns:1fr auto;gap:4px 12px;padding-bottom:12px;border-bottom:1px dashed var(--line)}
+.line .meta{color:var(--muted);font-size:.85rem}
+.qty{display:flex;align-items:center;gap:6px}
+.qty button{width:28px;height:28px;border-radius:8px;border:1px solid var(--line);background:var(--bg);color:var(--ink)}
+.total{display:flex;justify-content:space-between;font-family:var(--display);font-weight:800;font-size:1.2rem;font-variant-numeric:tabular-nums}
+.empty{color:var(--muted);text-align:center;padding:30px 0}
+form{display:grid;gap:10px}
+label{font-size:.85rem;font-weight:500;display:grid;gap:4px}
+input,select,textarea{font:inherit;padding:9px 11px;border:1px solid var(--line);border-radius:10px;background:var(--bg);color:var(--ink);width:100%}
+.pay{display:flex;gap:14px;font-size:.92rem}
+.pay label{display:flex;align-items:center;gap:6px;font-weight:400}
+.pay input{width:auto}
+.primary{border:0;border-radius:12px;padding:13px;background:var(--plum);color:var(--plum-ink);font-weight:700;font-size:1rem}
+.order-out{background:var(--mint);border-radius:12px;padding:14px;display:grid;gap:10px}
+.order-out pre{white-space:pre-wrap;margin:0;font:13px/1.5 ui-monospace,Menlo,monospace;background:var(--surface);padding:10px;border-radius:8px;max-height:200px;overflow:auto}
+.order-out .row{display:flex;gap:8px;flex-wrap:wrap}
+.order-out a,.order-out button{flex:1;text-align:center;border-radius:10px;padding:10px;font-weight:700;text-decoration:none;border:0;background:var(--ink);color:var(--bg)}
+.note{font-size:.82rem;color:var(--muted);margin:0}
+.err{color:#c0293f;font-size:.85rem;margin:0}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+
+</head>
+<body>
+<header class="bar">
+  <div class="wrap">
+    <div class="logo">
+      <svg width="34" height="34" viewBox="0 0 34 34" aria-hidden="true"><rect width="34" height="34" rx="10" fill="var(--plum)"/><path d="M9 12h16l-3 12h-10z" fill="var(--plum-ink)"/><path d="M13 12c0 3 2 5 4 5s4-2 4-5" stroke="var(--plum)" stroke-width="2" fill="none"/></svg>
+      <div>Kalaburagi Comfort<small>Innerwear · Men &amp; Women</small></div>
+    </div>
+    <nav>
+      <a href="#shop">Shop</a>
+      <a href="#delivery">Delivery</a>
+      <a href="#contact">Contact</a>
+      <button class="cart-btn" id="openCart" aria-label="Open cart">Cart <b id="cartCount">0</b></button>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <div>
+      <div class="kn">ಸ್ವಾಗತ · Welcome</div>
+      <h1>Everyday innerwear, delivered across Gulbarga.</h1>
+      <p>Soft cotton briefs, vests, bras and more for men and women. Order online, pay cash on delivery, and get it at your door in Kalaburagi within 24 hours.</p>
+      <div class="chips">
+        <span class="chip">Cash on delivery</span>
+        <span class="chip">UPI accepted</span>
+        <span class="chip">Free delivery above ₹499</span>
+        <span class="chip">Discreet packaging</span>
+      </div>
+    </div>
+    <div class="split">
+      <button class="m" data-jump="men"><h2>Men</h2><span>Briefs, trunks, vests, boxers</span>
+        <svg width="90" height="70" viewBox="0 0 120 90" aria-hidden="true"><path d="M10 15h100l-6 22c-14 4-26 14-30 40H46c-4-26-16-36-30-40z" fill="#3b5ba8"/><rect x="10" y="15" width="100" height="9" fill="#24396e"/></svg></button>
+      <button class="w" data-jump="women"><h2>Women</h2><span>Bras, panties, camisoles</span>
+        <svg width="90" height="70" viewBox="0 0 120 90" aria-hidden="true"><path d="M14 60c4-26 18-38 32-38s18 10 14 26c-4-16 0-26 14-26s28 12 32 38z" fill="#c8466b"/><path d="M14 60h92v8H14z" fill="#9c2f50"/><path d="M38 22l-6-16M82 22l6-16" stroke="#9c2f50" stroke-width="3"/></svg></button>
+    </div>
+  </div>
+</section>
+
+<section class="shop" id="shop">
+  <div class="wrap">
+    <div class="shop-head">
+      <h2>Shop the range</h2>
+      <div class="tabs" role="group" aria-label="Filter products">
+        <button data-f="all" aria-pressed="true">All</button>
+        <button data-f="men" aria-pressed="false">Men</button>
+        <button data-f="women" aria-pressed="false">Women</button>
+      </div>
+    </div>
+    <div class="grid" id="grid"></div>
+  </div>
+</section>
+
+<section class="info" id="delivery">
+  <div class="wrap">
+    <div><h3>Same-day in the city</h3><p>Orders placed before 2 pm reach most Kalaburagi areas the same evening.</p></div>
+    <div><h3>Pay at your door</h3><p>Cash on delivery or UPI. No advance payment needed.</p></div>
+    <div><h3>Easy size exchange</h3><p>Unopened packs can be exchanged for another size within 7 days.</p></div>
+    <div><h3>Plain packaging</h3><p>Every order ships in a plain, sealed cover with no product labels outside.</p></div>
+  </div>
+</section>
+
+<section class="contact" id="contact">
+  <div class="wrap">
+    <div>
+      <h2>Visit or message us</h2>
+      <dl>
+        <dt>WhatsApp</dt><dd id="phoneText">+91 72597 83363</dd>
+        <dt>Shop</dt><dd>Amyra Boutique Center, near HiFi Gym, Misbah Nagar, Kalaburagi (Gulbarga), Karnataka<br><a href="https://www.google.com/maps/search/?api=1&amp;query=Amyra+Boutique+Center+Misbah+Nagar+Gulbarga" target="_blank" rel="noopener" style="color:var(--plum);font-weight:700">Open in Google Maps ↗</a></dd>
+        <dt>Hours</dt><dd>Mon–Sat 10 am – 9 pm · Sun 11 am – 6 pm</dd>
+      </dl>
+    </div>
+    <div>
+      <h3>We deliver to</h3>
+      <div class="areas">
+        <span class="chip">Misbah Nagar</span><span class="chip">Super Market</span><span class="chip">Jewargi Colony</span><span class="chip">Aland Road</span>
+        <span class="chip">Sedam Road</span><span class="chip">Brahmpur</span><span class="chip">Station Area</span>
+        <span class="chip">Shahabazar</span><span class="chip">MB Nagar</span><span class="chip">Khuba Plot</span>
+        <span class="chip">Ram Mandir Circle</span><span class="chip">University Area</span>
+      </div>
+      <p class="note" style="margin-top:12px">Outside the city? Message us and we’ll ship by courier across Kalaburagi district.</p>
+    </div>
+  </div>
+</section>
+
+<footer><div class="wrap">© 2026 Kalaburagi Comfort Innerwear · Gulbarga, Karnataka</div></footer>
+
+<div class="scrim" id="scrim" hidden></div>
+<aside class="drawer" id="drawer" hidden aria-label="Your cart">
+  <div class="top"><h2>Your cart</h2><button class="x" id="closeCart" aria-label="Close cart">×</button></div>
+  <div class="scroll">
+    <div id="lines"></div>
+    <div class="total" id="totalRow"><span>Total</span><span id="total">₹0</span></div>
+    <p class="note" id="shipNote"></p>
+    <form id="orderForm" novalidate>
+      <label for="cName">Full name<input id="cName" autocomplete="name" required></label>
+      <label for="cPhone">Mobile number<input id="cPhone" inputmode="tel" autocomplete="tel" placeholder="10-digit number" required></label>
+      <label for="cArea">Area
+        <select id="cArea"><option>Misbah Nagar</option><option>Super Market</option><option>Jewargi Colony</option><option>Aland Road</option><option>Sedam Road</option><option>Brahmpur</option><option>Station Area</option><option>Shahabazar</option><option>MB Nagar</option><option>Khuba Plot</option><option>Ram Mandir Circle</option><option>University Area</option><option>Other (Kalaburagi district)</option></select></label>
+      <label for="cAddr">House / street / landmark<textarea id="cAddr" rows="2" required></textarea></label>
+      <div class="pay" role="radiogroup" aria-label="Payment">
+        <label><input type="radio" name="pay" id="payCod" value="Cash on delivery" checked> Cash on delivery</label>
+        <label><input type="radio" name="pay" id="payUpi" value="UPI"> UPI</label>
+      </div>
+      <p class="err" id="err" hidden></p>
+      <button class="primary" type="submit">Place order on WhatsApp</button>
+    </form>
+    <div class="order-out" id="out" hidden>
+      <strong>Your order message is ready</strong>
+      <pre id="msg"></pre>
+      <div class="row"><a id="waLink" href="#" target="_blank" rel="noopener">Open WhatsApp</a><button id="copyMsg" type="button">Copy message</button></div>
+      <p class="note">If WhatsApp doesn’t open, copy the message and send it to <span id="phoneText2"></span>. Your order is confirmed once we reply.</p>
+    </div>
+  </div>
+</aside>
+
+<script>
+const SHOP_PHONE = "917259783363"; // replace with the shop's WhatsApp number (country code + number)
+const FREE_SHIP = 499, SHIP_FEE = 40;
+
+const ART = {
+  brief:c=>`<path d="M20 30h120l-8 26c-18 5-34 18-40 48H68c-6-30-22-43-40-48z" fill="${c}"/><rect x="20" y="30" width="120" height="11" fill="rgba(0,0,0,.25)"/>`,
+  trunk:c=>`<path d="M22 28h116l-4 66H98l-18-26-18 26H26z" fill="${c}"/><rect x="22" y="28" width="116" height="12" fill="rgba(0,0,0,.25)"/>`,
+  boxer:c=>`<path d="M24 24h112l6 76h-48l-14-32-14 32H18z" fill="${c}"/><rect x="24" y="24" width="112" height="10" fill="rgba(0,0,0,.2)"/><path d="M40 48h80M40 64h80" stroke="rgba(255,255,255,.35)" stroke-width="4"/>`,
+  vest:c=>`<path d="M50 14h14c0 14 6 22 16 22s16-8 16-22h14c0 16 4 24 14 30v62H36V44c10-6 14-14 14-30z" fill="${c}"/>`,
+  thermal:c=>`<path d="M46 16h68l24 22-12 14-12-10v62H46V42l-12 10-12-14z" fill="${c}"/><path d="M66 16c2 8 8 12 14 12s12-4 14-12" stroke="rgba(0,0,0,.25)" stroke-width="4" fill="none"/>`,
+  bra:c=>`<path d="M20 74c4-30 22-44 38-44s22 12 22 28c0-16 6-28 22-28s34 14 38 44z" fill="${c}"/><rect x="20" y="74" width="120" height="10" fill="rgba(0,0,0,.25)"/><path d="M50 30l-8-20M110 30l8-20" stroke="rgba(0,0,0,.3)" stroke-width="4"/>`,
+  sports:c=>`<path d="M36 18h22c2 14 10 20 22 20s20-6 22-20h22l6 66H30z" fill="${c}"/><rect x="30" y="74" width="100" height="12" fill="rgba(0,0,0,.25)"/>`,
+  panty:c=>`<path d="M22 36h116l-6 20c-20 4-34 16-38 44H66c-4-28-18-40-38-44z" fill="${c}"/><path d="M22 36h116" stroke="rgba(255,255,255,.5)" stroke-width="6" stroke-dasharray="6 5"/>`,
+  cami:c=>`<path d="M56 12l6 24c6 4 12 6 18 6s12-2 18-6l6-24M52 40c8-4 18-4 28 2 10-6 20-6 28-2l8 66H44z" fill="${c}"/><path d="M56 12l6 24M104 12l-6 24" stroke="${c}" stroke-width="3"/>`,
+  shape:c=>`<path d="M42 14h76l-4 40 10 50H96l-16-30-16 30H36l10-50z" fill="${c}"/><path d="M46 30h68M46 44h68" stroke="rgba(0,0,0,.18)" stroke-width="3"/>`
+};
+
+const PRODUCTS = [
+  {id:"m1",g:"men",name:"Cotton Briefs · Pack of 3",desc:"Combed cotton with a soft covered waistband.",price:399,mrp:499,art:"brief",col:"#3b5ba8",bg:"var(--sky)",sizes:["S","M","L","XL","XXL"]},
+  {id:"m2",g:"men",name:"Stretch Trunks · Pack of 2",desc:"Cotton-elastane trunks that stay put all day.",price:449,mrp:549,art:"trunk",col:"#2c2c3a",bg:"var(--sky)",sizes:["S","M","L","XL","XXL"]},
+  {id:"m3",g:"men",name:"Checked Boxer Shorts",desc:"Breezy woven cotton for home and sleep.",price:349,art:"boxer",col:"#2f7a6b",bg:"var(--mint)",sizes:["M","L","XL","XXL"]},
+  {id:"m4",g:"men",name:"Sleeveless Cotton Vest",desc:"Rib-knit vest, sweat-absorbent for summer heat.",price:199,mrp:249,art:"vest",col:"#e9eef6",bg:"var(--sky)",sizes:["80","85","90","95","100","105"]},
+  {id:"m5",g:"men",name:"Thermal Top",desc:"Brushed inner layer for cold December mornings.",price:549,art:"thermal",col:"#6b4a3a",bg:"var(--mint)",sizes:["M","L","XL","XXL"]},
+  {id:"w1",g:"women",name:"Everyday T-Shirt Bra",desc:"Seamless moulded cups, invisible under kurtis.",price:399,mrp:499,art:"bra",col:"#d98b9b",bg:"var(--blush)",sizes:["32B","34B","34C","36B","36C","38C"]},
+  {id:"w2",g:"women",name:"Cotton Panties · Pack of 3",desc:"Mid-rise hipsters in breathable cotton.",price:299,mrp:399,art:"panty",col:"#8a5fc0",bg:"var(--blush)",sizes:["S","M","L","XL","XXL"]},
+  {id:"w3",g:"women",name:"Non-Wired Sports Bra",desc:"Medium support for yoga, walks and housework.",price:449,art:"sports",col:"#2f6db0",bg:"var(--sky)",sizes:["S","M","L","XL"]},
+  {id:"w4",g:"women",name:"Cotton Camisole",desc:"Adjustable straps, ideal under sheer tops.",price:249,art:"cami",col:"#f2e6d8",bg:"var(--mint)",sizes:["S","M","L","XL"]},
+  {id:"w5",g:"women",name:"Saree Shapewear",desc:"Flared petticoat shapewear for a smooth drape.",price:599,mrp:749,art:"shape",col:"#c7a27a",bg:"var(--blush)",sizes:["S","M","L","XL","XXL"]}
+];
+
+const $ = s=>document.querySelector(s);
+const rupee = n=>"₹"+n.toLocaleString("en-IN");
+let filter="all", picked={}, cart=[];
+try{cart=JSON.parse(localStorage.getItem("kci-cart")||"[]")}catch(e){cart=[]}
+const save=()=>{try{localStorage.setItem("kci-cart",JSON.stringify(cart))}catch(e){}};
+
+function renderGrid(){
+  $("#grid").innerHTML = PRODUCTS.filter(p=>filter==="all"||p.g===filter).map(p=>{
+    const sel = picked[p.id]||p.sizes[Math.min(1,p.sizes.length-1)];
+    picked[p.id]=sel;
+    return `<article class="card">
+      <div class="pic" style="background:${p.bg}"><span class="tag">${p.g==="men"?"Men":"Women"}</span>
+        <svg viewBox="0 0 160 120" width="70%" aria-hidden="true">${ART[p.art](p.col)}</svg></div>
+      <div class="body">
+        <h3>${p.name}</h3><p class="desc">${p.desc}</p>
+        <div class="price">${rupee(p.price)}${p.mrp?`<s>${rupee(p.mrp)}</s>`:""}</div>
+        <div class="sizes" role="group" aria-label="Size">${p.sizes.map(s=>`<button data-p="${p.id}" data-s="${s}" aria-pressed="${s===sel}">${s}</button>`).join("")}</div>
+        <button class="add" data-add="${p.id}">Add to cart</button>
+      </div></article>`}).join("");
+}
+
+function renderCart(){
+  const count = cart.reduce((a,l)=>a+l.q,0);
+  $("#cartCount").textContent=count;
+  const sub = cart.reduce((a,l)=>a+l.q*PRODUCTS.find(p=>p.id===l.id).price,0);
+  const ship = sub===0||sub>=FREE_SHIP?0:SHIP_FEE;
+  $("#lines").innerHTML = cart.length? cart.map((l,i)=>{const p=PRODUCTS.find(x=>x.id===l.id);
+    return `<div class="line"><div><strong>${p.name}</strong><div class="meta">Size ${l.s} · ${rupee(p.price)} each</div></div>
+      <div class="qty"><button data-q="${i}" data-d="-1" aria-label="Less">−</button><span>${l.q}</span><button data-q="${i}" data-d="1" aria-label="More">+</button></div></div>`}).join("")
+    : `<p class="empty">Your cart is empty. Pick a size and tap “Add to cart”.</p>`;
+  $("#total").textContent = rupee(sub+ship);
+  $("#shipNote").textContent = sub===0?"":ship?`Includes ${rupee(SHIP_FEE)} delivery. Add ${rupee(FREE_SHIP-sub)} more for free delivery.`:"Free delivery on this order.";
+  $("#totalRow").hidden = $("#orderForm").hidden = cart.length===0;
+  return {sub,ship};
+}
+
+document.addEventListener("click",e=>{
+  const t=e.target.closest("button,[data-jump]"); if(!t) return;
+  if(t.dataset.f){filter=t.dataset.f;document.querySelectorAll(".tabs button").forEach(b=>b.setAttribute("aria-pressed",b===t));renderGrid();}
+  if(t.dataset.jump){filter=t.dataset.jump;document.querySelectorAll(".tabs button").forEach(b=>b.setAttribute("aria-pressed",b.dataset.f===filter));renderGrid();$("#shop").scrollIntoView({behavior:"smooth"});}
+  if(t.dataset.s){picked[t.dataset.p]=t.dataset.s;t.parentElement.querySelectorAll("button").forEach(b=>b.setAttribute("aria-pressed",b===t));}
+  if(t.dataset.add){const id=t.dataset.add,s=picked[id];const l=cart.find(x=>x.id===id&&x.s===s);l?l.q++:cart.push({id,s,q:1});save();renderCart();
+    t.textContent="Added ✓";t.classList.add("done");setTimeout(()=>{t.textContent="Add to cart";t.classList.remove("done")},1200);}
+  if(t.dataset.q!==undefined){const l=cart[+t.dataset.q];l.q+=+t.dataset.d;if(l.q<=0)cart.splice(+t.dataset.q,1);save();renderCart();$("#out").hidden=true;}
+});
+
+const openCart=()=>{$("#drawer").hidden=$("#scrim").hidden=false;renderCart();$("#closeCart").focus();};
+const closeCart=()=>{$("#drawer").hidden=$("#scrim").hidden=true;};
+$("#openCart").onclick=openCart; $("#closeCart").onclick=closeCart; $("#scrim").onclick=closeCart;
+document.addEventListener("keydown",e=>{if(e.key==="Escape")closeCart();});
+
+$("#orderForm").addEventListener("submit",e=>{
+  e.preventDefault();
+  const name=$("#cName").value.trim(), phone=$("#cPhone").value.replace(/\D/g,""), addr=$("#cAddr").value.trim();
+  const err=$("#err");
+  if(!name||phone.length<10||!addr){err.textContent="Please fill in your name, a 10-digit mobile number and your address.";err.hidden=false;return;}
+  err.hidden=true;
+  const {sub,ship}=renderCart();
+  const pay=document.querySelector('input[name="pay"]:checked').value;
+  const items=cart.map(l=>{const p=PRODUCTS.find(x=>x.id===l.id);return `• ${p.name} (Size ${l.s}) × ${l.q} = ${rupee(p.price*l.q)}`}).join("\n");
+  const msg=`New order – Kalaburagi Comfort Innerwear\n\n${items}\n\nSubtotal: ${rupee(sub)}\nDelivery: ${ship?rupee(ship):"Free"}\nTotal: ${rupee(sub+ship)}\nPayment: ${pay}\n\nName: ${name}\nMobile: ${phone}\nArea: ${$("#cArea").value}\nAddress: ${addr}`;
+  $("#msg").textContent=msg;
+  $("#waLink").href=`https://wa.me/${SHOP_PHONE}?text=${encodeURIComponent(msg)}`;
+  $("#out").hidden=false; $("#out").scrollIntoView({behavior:"smooth",block:"nearest"});
+});
+$("#copyMsg").onclick=()=>{const b=$("#copyMsg");
+  navigator.clipboard.writeText($("#msg").textContent).then(()=>{b.textContent="Copied";},()=>{const r=document.createRange();r.selectNodeContents($("#msg"));const s=getSelection();s.removeAllRanges();s.addRange(r);b.textContent="Selected – press copy";});};
+
+$("#phoneText2").textContent=$("#phoneText").textContent;
+renderGrid(); renderCart();
+</script>
+
+</body>
+</html>
